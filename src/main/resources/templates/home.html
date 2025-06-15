@@ -1,27 +1,106 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymleaf.org" th:replace="base::Layout(~{::section})">
+<html
+  lang="en"
+  xmlns:th="http://www.thymleaf.org"
+  th:replace="base::Layout(~{::section})"
+>
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Smart Contact Manager - Your Contacts, Smarter</title>
+  </head>
 
-<head>
-	<meta charset="ISO-8859-1">
-	<title>This is Home Page</title>
-</head>
+  <body>
+    <section>
+      <!-- Hero Banner -->
+      <div class="banner d-flex justify-content-center align-items-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 text-white">
+              <h1 class="display-4 font-weight-bold mb-4">
+                Smart Contact Manager
+              </h1>
+              <p class="lead mb-4">
+                Organize your contacts intelligently. Access them from anywhere,
+                anytime. Our secure platform helps you manage your network more
+                efficiently.
+              </p>
+              <div class="mt-5">
+                <a class="btn btn-primary btn-lg mr-3" th:href="@{/signin}">
+                  <i class="fas fa-sign-in-alt mr-2"></i>Get Started
+                </a>
+                <a class="btn btn-outline-light btn-lg" th:href="@{/about}">
+                  <i class="fas fa-info-circle mr-2"></i>Learn More
+                </a>
+              </div>
+            </div>
+            <div class="col-md-6 d-none d-md-block text-center">
+              <img
+                th:src="@{/img/contact_hero.png}"
+                alt="Contact Management"
+                class="img-fluid"
+                style="max-height: 400px"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
 
-<body>
+      <!-- Features Section -->
+      <div class="container py-5">
+        <h2 class="text-center mb-5">Why Choose Smart Contact Manager?</h2>
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 text-center">
+              <div class="card-body">
+                <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+                <h4 class="card-title">Secure Storage</h4>
+                <p class="card-text">
+                  Your contacts are encrypted and stored securely in our
+                  database, ensuring your privacy.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 text-center">
+              <div class="card-body">
+                <i class="fas fa-cloud fa-3x text-primary mb-3"></i>
+                <h4 class="card-title">Cloud Access</h4>
+                <p class="card-text">
+                  Access your contacts from any device with internet
+                  connectivity, anytime you need them.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 text-center">
+              <div class="card-body">
+                <i class="fas fa-search fa-3x text-primary mb-3"></i>
+                <h4 class="card-title">Smart Search</h4>
+                <p class="card-text">
+                  Find contacts quickly with our intelligent search
+                  functionality and filters.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-	<section class="banner d-flex justify-content-center align-items-center">
-		<div class="text-center">
-			<h1 class="font-weight-bold">Smart Contact Manager</h1>
-			<p>
-				Start Collecting your contact in very smarter way. we provide
-				very efficient and smarter way of handling contacts
-			</p>
-			<a class="btn bg-primary btn-lg text-white" th:href="@{/signin}">Get Start</a>
-			
-
-			
-			
-		</div>
-	</section>
-</body>
-
+      <!-- Call to Action -->
+      <div class="bg-light py-5">
+        <div class="container text-center">
+          <h3 class="mb-4">Ready to organize your contacts?</h3>
+          <p class="lead mb-4">
+            Join thousands of users who trust Smart Contact Manager for their
+            contact needs.
+          </p>
+          <a class="btn btn-primary btn-lg" th:href="@{/signup}">
+            <i class="fas fa-user-plus mr-2"></i>Sign Up Now - It's Free!
+          </a>
+        </div>
+      </div>
+    </section>
+  </body>
 </html>

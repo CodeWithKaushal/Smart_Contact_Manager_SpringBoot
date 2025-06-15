@@ -1,55 +1,273 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymleaf.org" th:replace="normal/base::Layout(~{::section})">
+<html
+  lang="en"
+  xmlns:th="http://www.thymleaf.org"
+  th:replace="normal/base::Layout(~{::section})"
+>
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>This is Home Page</title>
+  </head>
 
-<head>
-	<meta charset="ISO-8859-1">
-	<title>This is Home Page</title>
-</head>
+  <body>
+    <section>
+      <div class="container">
+        <!-- Welcome Banner -->
+        <div class="card mb-4 bg-primary text-white shadow-sm">
+          <div class="card-body py-4">
+            <div class="row align-items-center">
+              <div class="col-md-2 text-center">
+                <img
+                  style="height: 100px; width: 100px"
+                  class="my_profile_picture"
+                  src=""
+                  th:src="@{'/img/'+${user.imageUrl}}"
+                  alt="profile photo"
+                  onerror="this.src='/img/default.png'"
+                />
+              </div>
+              <div class="col-md-10">
+                <h2 class="mb-1">
+                  Welcome, <span th:text="${user.name}"></span>!
+                </h2>
+                <p class="lead mb-0">
+                  Manage your contacts efficiently with Smart Contact Manager
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-<body>
+        <!-- Stats Cards Row -->
+        <div class="row mb-4">
+          <div class="col-md-4 mb-3">
+            <div class="card text-center h-100 shadow-sm border-0">
+              <div class="card-body">
+                <i class="fas fa-address-book fa-3x text-primary mb-3"></i>
+                <h5 class="card-title">Total Contacts</h5>
+                <p
+                  class="card-text display-4 font-weight-bold text-primary"
+                  th:text="${user.contacts.size()}"
+                >
+                  0
+                </p>
+                <a
+                  th:href="@{/user/show-contacts/0}"
+                  class="btn btn-sm btn-outline-primary mt-2"
+                  >View All</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="card text-center h-100 shadow-sm border-0">
+              <div class="card-body">
+                <i class="fas fa-user-plus fa-3x text-success mb-3"></i>
+                <h5 class="card-title">Add New Contact</h5>
+                <p class="card-text">
+                  Create and manage new contacts in your list
+                </p>
+                <a th:href="@{/user/add-contact}" class="btn btn-success"
+                  >Add Contact</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="card text-center h-100 shadow-sm border-0">
+              <div class="card-body">
+                <i class="fas fa-cogs fa-3x text-info mb-3"></i>
+                <h5 class="card-title">Settings</h5>
+                <p class="card-text">
+                  Manage your profile and account settings
+                </p>
+                <a
+                  th:href="@{/user/settings}"
+                  class="btn btn-sm btn-outline-info mt-2"
+                  >Settings</a
+                >
+                <a
+                  th:href="@{/user/profile}"
+                  class="btn btn-sm btn-outline-info mt-2"
+                  >Profile</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
 
-	<section>
-		<div class="container">
-			<div class="card">
-				<div class="card-body my-5">
-					<div class="container text-center">
-						<img style="height: 200px; width: 200px;" class="my_profile_picture" src=""
-							th:src="@{'/img/contact_logo.png'}" alt="profile photo" />
+        <!-- Recent Contacts Section -->
+        <div class="card mb-4 shadow-sm border-0">
+          <div
+            class="card-header bg-light d-flex justify-content-between align-items-center"
+          >
+            <h5 class="mb-0">
+              <i class="fas fa-clock mr-2"></i>Recent Contacts
+            </h5>
+            <a th:href="@{/user/show-contacts/0}" class="btn btn-sm btn-primary"
+              >View All</a
+            >
+          </div>
+          <div class="card-body">
+            <div
+              class="table-responsive"
+              th:if="${not #lists.isEmpty(user.contacts)}"
+            >
+              <table class="table table-hover">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    th:each="contact, iterStat : ${user.contacts}"
+                    th:if="${iterStat.index < 3}"
+                  >
+                    <td>
+                      <img
+                        class="my_profile_picture mr-2"
+                        style="width: 30px; height: 30px"
+                        th:src="@{'/img/'+${contact.image}}"
+                        alt="contact photo"
+                      />
+                      <span th:text="${contact.name}"></span>
+                    </td>
+                    <td th:text="${contact.email}"></td>
+                    <td th:text="${contact.phone}"></td>
+                    <td>
+                      <a
+                        th:href="@{'/user/'+${contact.cId}+'/contact'}"
+                        class="btn btn-sm btn-info"
+                      >
+                        <i class="fas fa-eye"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div
+              class="text-center py-3"
+              th:if="${#lists.isEmpty(user.contacts)}"
+            >
+              <i class="fas fa-address-card fa-3x text-muted mb-3"></i>
+              <p class="lead text-muted">You don't have any contacts yet.</p>
+              <a th:href="@{/user/add-contact}" class="btn btn-primary"
+                >Add Your First Contact</a
+              >
+            </div>
+          </div>
+        </div>
 
-					</div>
-					<h1 class="text-center mt-3 text-secondary font-italic font-weight-light">
-						Start Adding your contact on cloud...
-					</h1>
-					<a th:href="@{/user/add-contact}" class="btn btn-primary btn-block text-uppercase">Add new
-						Contact</a>
+        <!-- Donation Card -->
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-header bg-light">
+            <h5 class="mb-0">
+              <i class="fas fa-hand-holding-heart mr-2"></i>Support Our Project
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-8">
+                <h4 class="mb-3">Donate to Help Us Grow</h4>
+                <p class="text-muted">
+                  Your donations help us maintain and improve Smart Contact
+                  Manager, keeping it free for everyone.
+                </p>
+                <div class="form-group">
+                  <label for="payment_field" class="font-weight-bold"
+                    >Amount (in INR)</label
+                  >
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        ><i class="fas fa-rupee-sign"></i
+                      ></span>
+                    </div>
+                    <input
+                      id="payment_field"
+                      type="number"
+                      class="form-control"
+                      placeholder="Enter amount"
+                      min="1"
+                    />
+                  </div>
+                </div>
+                <button onclick="paymentStart()" class="btn btn-success btn-lg">
+                  <i class="fas fa-donate mr-2"></i>Donate Now
+                </button>
+              </div>
+              <div class="col-md-4 d-none d-md-block text-center">
+                <img
+                  style="max-height: 150px"
+                  th:src="@{/img/donation.png}"
+                  alt="Donation"
+                  onerror="this.src='/img/contact_logo.png'"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
 
-					<hr />
+        <!-- Quick Links -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card shadow-sm border-0">
+              <div class="card-body">
+                <h5 class="mb-3">
+                  <i class="fas fa-link mr-2"></i>Quick Links
+                </h5>
+                <div class="row">
+                  <div class="col-md-3 col-6 mb-2">
+                    <a
+                      th:href="@{/user/add-contact}"
+                      class="btn btn-light btn-block text-left"
+                    >
+                      <i class="fas fa-plus-circle text-success mr-2"></i>Add
+                      Contact
+                    </a>
+                  </div>
+                  <div class="col-md-3 col-6 mb-2">
+                    <a
+                      th:href="@{/user/show-contacts/0}"
+                      class="btn btn-light btn-block text-left"
+                    >
+                      <i class="fas fa-list text-primary mr-2"></i>All Contacts
+                    </a>
+                  </div>
+                  <div class="col-md-3 col-6 mb-2">
+                    <a
+                      th:href="@{/user/profile}"
+                      class="btn btn-light btn-block text-left"
+                    >
+                      <i class="fas fa-user text-info mr-2"></i>Your Profile
+                    </a>
+                  </div>
+                  <div class="col-md-3 col-6 mb-2">
+                    <a
+                      th:href="@{/user/settings}"
+                      class="btn btn-light btn-block text-left"
+                    >
+                      <i class="fas fa-cog text-secondary mr-2"></i>Settings
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-					<h3 class="my-3">Donate Us</h3> 
-
-					<input id="payment_field" type="text" class="form-control my-2" placeholder="Enter amount here" />
-
-
-					<div class="container text-center mt-4">
-						<button onclick="paymentStart()" class="btn btn-success btn-block">Checkout</button>
-					</div>
-
-				</div>
-			</div>
-		</div>
-
-
-		<script>
-
-
-			$(document).ready(() => {
-				$('.item').removeClass('active');
-				$("#home-link").addClass("active");
-			})
-
-		</script>
-
-	</section>
-</body>
-
+      <script>
+        $(document).ready(() => {
+          $(".item").removeClass("active");
+          $("#home-link").addClass("active");
+        });
+      </script>
+    </section>
+  </body>
 </html>

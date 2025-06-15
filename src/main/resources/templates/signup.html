@@ -1,155 +1,187 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymleaf.org" th:replace="base::Layout(~{::section})">
-
-<head>
-	<meta charset="ISO-8859-1">
-	<title>This is Home Page</title>
-</head>
-
-<body>
-
-	<section>
-
-		<div class="container">
-
-			<div class="row">
-				<div class="col-md-7 offset-md-3">
-
-					<div class="my-card mt-1">
-
-
-
-						<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert"
-							role="alert">
-							<p class="text-center" th:text="${session.message.content}"></p>
-							<!--	<th:block th:text="${session.removeAttribute('message')}"></th:block> !-->
-
-
-						</div>
-
-
-
-						<div class="container text-center">
-
-							<img style="width: 100px;" src="" th:src="@{/img/sign_up.png}" alt="" />
-
-						</div>
-
-						<h1 class="text-center">Register Here !!</h1>
-
-						<form action="" th:action="@{/do_register}" method="post"
-							th:object="${user}">
-
-
- 
-							<!-- name field -->
-
-							<div class="form-group">
-
-								<label for="name_field" class="form-label">Your Name</label>
-								<input name="name"
-								 type="text" 
-								 class="form-control "	
-								 th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}"		
-								 id="name_field"
-								 aria-describedby="emailHelp" 
-								 placeholder="Enter here" required
-								 th:value="${user.name}" />
-								 
-								 <div class="invalid-feedback" th:each="e : ${#fields.errors('name')}" th:text="${e}">
-									 
-								 </div>
-
-							
-
-							</div>
-
-
-
-							<!-- Email field -->
-
-							<div class="form-group">
-
-								<label for="email_field" class="form-label">Your Email</label>
-
-								<input name="email" type="email" class="form-control" id="email_field"
-									aria-describedby="emailHelp" placeholder="Enter here" required
-									th:value="${user.email}" />
-
-
-
-
-							</div>
-
-							<!-- password field -->
-
-							<div class="form-group">
-
-								<label for="password_field" class="form-label">Your Password</label>
-
-								<input name="password" type="password" class="form-control" id="password_field"
-									aria-describedby="emailHelp" placeholder="Enter here" required />
-
-
-							</div>
-
-
-							<!-- user about  field -->
-
-							<div class="form-group">
-
-								<textarea name="about" th:text="${user.about}" placeholder="Enter something yourself"
-									rows="6" class="form-control"></textarea>
-
-							</div>
-
-
-
-
-							<!-- terms and condition agreement -->
-
-
-							<div class="form-group form-check text-center">
-
-								<input type="checkbox" name="agreement" class="form-check-input" id="agreement" />
-
-								<label for="agreement">Accept terms and condition</label>
-
-							</div>
-
-
-
-
-
-							<!--Button field -->
-
-							<div class="container text-center">
-
-								<button type="submit" class="btn btn-primary text-white">
-									Submit
-								</button>
-
-								<button type="reset" class="btn btn-warning text-white ">
-									Reset
-								</button>
-
-							</div>
-
-
-
-
-						</form>
-
-
-						</form>
-
-
-					</div>
-				</div>
-
-			</div>
-
-	</section>
-</body>
-
+<html
+  lang="en"
+  xmlns:th="http://www.thymleaf.org"
+  th:replace="base::Layout(~{::section})"
+>
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Register - Smart Contact Manager</title>
+  </head>
+
+  <body>
+    <section class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <div class="card my-card mt-3">
+              <div
+                th:if="${session.message}"
+                th:classappend="${session.message.type}"
+                class="alert"
+                role="alert"
+              >
+                <p class="text-center" th:text="${session.message.content}"></p>
+              </div>
+
+              <div class="card-body">
+                <div class="text-center mb-4">
+                  <img
+                    style="width: 80px"
+                    src=""
+                    th:src="@{/img/sign_up.png}"
+                    alt="Registration"
+                  />
+                  <h2 class="mt-3">Create Your Account</h2>
+                  <p class="text-muted">
+                    Join our community and start managing your contacts
+                  </p>
+                </div>
+
+                <form
+                  action=""
+                  th:action="@{/do_register}"
+                  method="post"
+                  th:object="${user}"
+                  class="needs-validation"
+                >
+                  <div class="row">
+                    <div class="col-md-6">
+                      <!-- name field -->
+                      <div class="form-group">
+                        <label for="name_field" class="form-label"
+                          >Full Name</label
+                        >
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"
+                              ><i class="fas fa-user"></i
+                            ></span>
+                          </div>
+                          <input
+                            name="name"
+                            type="text"
+                            class="form-control"
+                            th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}"
+                            id="name_field"
+                            placeholder="Enter your full name"
+                            required
+                            th:value="${user.name}"
+                          />
+                          <div
+                            class="invalid-feedback"
+                            th:each="e : ${#fields.errors('name')}"
+                            th:text="${e}"
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <!-- Email field -->
+                      <div class="form-group">
+                        <label for="email_field" class="form-label"
+                          >Email Address</label
+                        >
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"
+                              ><i class="fas fa-envelope"></i
+                            ></span>
+                          </div>
+                          <input
+                            name="email"
+                            type="email"
+                            class="form-control"
+                            id="email_field"
+                            placeholder="Enter your email"
+                            required
+                            th:value="${user.email}"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- password field -->
+                  <div class="form-group">
+                    <label for="password_field" class="form-label"
+                      >Create Password</label
+                    >
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"
+                          ><i class="fas fa-lock"></i
+                        ></span>
+                      </div>
+                      <input
+                        name="password"
+                        type="password"
+                        class="form-control"
+                        id="password_field"
+                        placeholder="Create a strong password"
+                        required
+                      />
+                    </div>
+                    <small class="form-text text-muted"
+                      >Password must be at least 8 characters long</small
+                    >
+                  </div>
+
+                  <!-- user about field -->
+                  <div class="form-group">
+                    <label for="about_field" class="form-label"
+                      >About Yourself</label
+                    >
+                    <textarea
+                      name="about"
+                      th:text="${user.about}"
+                      id="about_field"
+                      placeholder="Tell us a bit about yourself"
+                      rows="4"
+                      class="form-control"
+                    ></textarea>
+                  </div>
+
+                  <!-- terms and condition agreement -->
+                  <div class="form-group form-check">
+                    <input
+                      type="checkbox"
+                      name="agreement"
+                      class="form-check-input"
+                      id="agreement"
+                      required
+                    />
+                    <label class="form-check-label" for="agreement">
+                      I agree to the <a href="#">Terms of Service</a> and
+                      <a href="#">Privacy Policy</a>
+                    </label>
+                  </div>
+
+                  <!--Button field -->
+                  <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg px-5">
+                      <i class="fas fa-user-plus mr-2"></i>Register
+                    </button>
+                    <button type="reset" class="btn btn-light btn-lg ml-2">
+                      <i class="fas fa-redo mr-2"></i>Reset
+                    </button>
+                  </div>
+                </form>
+
+                <div class="text-center mt-4">
+                  <p class="mb-0">
+                    Already have an account?
+                    <a th:href="@{/signin}" class="font-weight-bold"
+                      >Login here</a
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
 </html>

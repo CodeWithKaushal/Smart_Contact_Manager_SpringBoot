@@ -1,17 +1,106 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymleaf.org" th:replace="base::Layout(~{::section})">
+<html
+  lang="en"
+  xmlns:th="http://www.thymleaf.org"
+  th:replace="base::Layout(~{::section})"
+>
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>About - Smart Contact Manager</title>
+  </head>
 
-<head>
-	<meta charset="ISO-8859-1">
-	<title>This is Home Page</title>
-</head>
+  <body>
+    <section>
+      <div class="container py-5">
+        <div class="row">
+          <div class="col-md-12 text-center mb-4">
+            <i class="fas fa-address-book fa-4x text-primary mb-3"></i>
+            <h1 class="display-4">About Smart Contact Manager</h1>
+            <p class="lead">
+              A modern solution for managing your contacts efficiently
+            </p>
+          </div>
+        </div>
 
-<body>
+        <div class="row mb-5">
+          <div class="col-md-8 offset-md-2">
+            <div class="card shadow-sm border-0">
+              <div class="card-body p-4">
+                <h2 class="text-primary mb-3">Our Mission</h2>
+                <p class="lead">
+                  Smart Contact Manager is designed to help you organize and
+                  manage your personal and professional contacts in one secure
+                  place, accessible from anywhere.
+                </p>
+                <p>
+                  In today's connected world, managing your network effectively
+                  is crucial. Smart Contact Manager provides a simple yet
+                  powerful platform to store, organize, and access your contacts
+                  information quickly and securely.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-	<section>
-		<h1>This is about page</h1>
-		<h2>here we are going to write about Smart contact manager</h2>
-	</section>
-</body>
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+              <div class="card-body text-center p-4">
+                <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+                <h3>Secure Storage</h3>
+                <p>
+                  Your contact information is securely stored and protected with
+                  modern encryption techniques. Your data privacy is our top
+                  priority.
+                </p>
+              </div>
+            </div>
+          </div>
 
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+              <div class="card-body text-center p-4">
+                <i class="fas fa-tachometer-alt fa-3x text-primary mb-3"></i>
+                <h3>Easy Management</h3>
+                <p>
+                  Add, update, delete and search contacts with our intuitive
+                  user interface designed for efficiency and ease of use.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+              <div class="card-body text-center p-4">
+                <i class="fas fa-mobile-alt fa-3x text-primary mb-3"></i>
+                <h3>Access Anywhere</h3>
+                <p>
+                  Access your contacts from any device with internet connection.
+                  Our responsive design works on desktops, tablets, and mobile
+                  phones.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-md-8 offset-md-2 text-center">
+            <h3 class="mb-4">Ready to get started?</h3>
+            <a th:href="@{/signup}" class="btn btn-primary btn-lg px-4">
+              <i class="fas fa-user-plus mr-2"></i> Sign Up Now
+            </a>
+            <a
+              th:href="@{/signin}"
+              class="btn btn-outline-primary btn-lg ml-2 px-4"
+            >
+              <i class="fas fa-sign-in-alt mr-2"></i> Sign In
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
 </html>

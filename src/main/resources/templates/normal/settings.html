@@ -1,60 +1,123 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymleaf.org" th:replace="normal/base::Layout(~{::section})">
+<html
+  lang="en"
+  xmlns:th="http://www.thymleaf.org"
+  th:replace="normal/base::Layout(~{::section})"
+>
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Settings</title>
+  </head>
 
-<head>
-	<meta charset="ISO-8859-1">
-	<title>Settings</title>
-</head>
+  <body>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <div class="card shadow border-0">
+              <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">
+                  <i class="fas fa-lock mr-2"></i>Change Password
+                </h3>
+              </div>
+              <div class="card-body p-4">
+                <div class="text-center mb-4">
+                  <i class="fas fa-key fa-3x text-primary mb-3"></i>
+                  <p class="text-muted">
+                    Update your password to keep your account secure
+                  </p>
+                </div>
 
-<body>
+                <form th:action="@{/user/change-password}" method="post">
+                  <!-- Old password field -->
+                  <div class="form-group">
+                    <label for="oldPassword"
+                      ><i class="fas fa-unlock-alt mr-1"></i> Current
+                      Password</label
+                    >
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text bg-light">
+                          <i class="fas fa-lock text-primary"></i>
+                        </span>
+                      </div>
+                      <input
+                        name="oldPassword"
+                        type="password"
+                        id="oldPassword"
+                        class="form-control"
+                        placeholder="Enter your current password"
+                        required
+                      />
+                    </div>
+                    <small class="form-text text-muted"
+                      >Enter your existing password</small
+                    >
+                  </div>
 
-	<section>
-	 
-	 <div class="container">
-		 <div class="row">
-			 <div class="col-md-12">
-				 <div class="card">
-					 <div class="card-body">
-						 <h3 class="mb-3">Change Password</h3>
-						 <form th:action="@{/user/change-password}" method="post">
-							 
-							 <!--old pass field-->
-							 <div class="form-group">
-								 <input name="oldPassword" type="text" class="form-control" placeholder="Enter old password" />
-							 </div>
-							 
-							 <!--new pass field-->
-							 <div class="form-group">
-								 <input name="newPassword" type="text" class="form-control" placeholder="Enter new password" />
-							 </div>
-							 
-							<div class="container text-center">
-								<button type="submit" class="btn btn-success">Change</button>
-								<button type="reset" class="btn btn-warning">Reset</button>
-								
-							</div>
-							 
-						 </form>
-						 
-					 </div>
-					 
-				 </div>
-			 </div>
-			 
-		 </div>
-	 </div>
-		
-		<script>
-			
-			
-			$(document).ready(()=>{
-				$('.item').removeClass('active');
-				$("#setting-link").addClass("active");
-			})
-			
-		</script>
-		
-	</section>
-</body>
+                  <!-- New password field -->
+                  <div class="form-group">
+                    <label for="newPassword"
+                      ><i class="fas fa-key mr-1"></i> New Password</label
+                    >
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text bg-light">
+                          <i class="fas fa-lock text-success"></i>
+                        </span>
+                      </div>
+                      <input
+                        name="newPassword"
+                        type="password"
+                        id="newPassword"
+                        class="form-control"
+                        placeholder="Enter your new password"
+                        required
+                      />
+                    </div>
+                    <small class="form-text text-muted"
+                      >Choose a strong password with at least 8
+                      characters</small
+                    >
+                  </div>
 
+                  <div class="form-group d-flex justify-content-between mt-4">
+                    <button type="reset" class="btn btn-outline-secondary">
+                      <i class="fas fa-undo mr-1"></i> Reset
+                    </button>
+                    <button type="submit" class="btn btn-success">
+                      <i class="fas fa-save mr-1"></i> Update Password
+                    </button>
+                  </div>
+                </form>
+
+                <hr class="my-4" />
+
+                <div class="text-center">
+                  <a th:href="@{/user/profile}" class="btn btn-outline-primary">
+                    <i class="fas fa-user-circle mr-1"></i> View Profile
+                  </a>
+                  <a
+                    th:href="@{/user/index}"
+                    class="btn btn-outline-secondary ml-2"
+                  >
+                    <i class="fas fa-home mr-1"></i> Dashboard
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional settings cards could be added here in the future -->
+      </div>
+
+      <script>
+        $(document).ready(() => {
+          $(".item").removeClass("active");
+          $("#setting-link").addClass("active");
+        });
+      </script>
+    </section>
+  </body>
 </html>
