@@ -6,14 +6,13 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -29,7 +28,11 @@ public class User {
 	private String name;
 
 	@Column(unique = true)
+	@NotBlank(message = "Email field is required !!")
+	@Email(regexp = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$", message = "Invalid email format")
 	private String email;
+	
+	@NotBlank(message = "Password field is required !!")
 	private String password;
 	private String role;
 	private boolean enabled;
