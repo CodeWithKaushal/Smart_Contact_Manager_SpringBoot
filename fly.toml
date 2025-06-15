@@ -1,0 +1,16 @@
+app = "smart-contact-manager-springboot"
+primary_region = "ewr"  # Newark, adjust if you prefer another region
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  SPRING_PROFILES_ACTIVE = "prod"
